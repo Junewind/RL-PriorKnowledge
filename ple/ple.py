@@ -110,10 +110,13 @@ class PLE(object):
 
         # update the scores of games with values we pick
         if reward_values:
+            print("we here adjusting rewards")
             self.game.adjustRewards(reward_values)
-
+            print(reward_values)
 
         if isinstance(self.game, PyGameWrapper):
+            # print("is instance true")
+            # print(rng)
             if isinstance(rng, np.random.RandomState):
                 self.rng = rng
             else:
@@ -180,7 +183,7 @@ class PLE(object):
 
         """
         actions = self.game.actions
-
+        # print(self.game.actions)
         if (sys.version_info > (3, 0)): #python ver. 3
             if isinstance(actions, dict) or isinstance(actions, dict_values):
                 actions = actions.values()

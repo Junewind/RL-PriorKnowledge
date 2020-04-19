@@ -1,4 +1,3 @@
-__author__ = 'Rachit Dubey'
 import pygame
 import sys
 from pygame.constants import K_a, K_d, K_SPACE, K_w, K_s, QUIT, KEYDOWN
@@ -34,11 +33,18 @@ class originalGame(PyGameWrapper):
 			self, self.width, self.height, actions=actions)
 
 		self.rewards = {
-			"positive": 0, 
-			"win": 1,
-			"negative": 0, 
-			"tick": 0
+		"positive": 1.0,
+		"negative": -1.0,
+		"tick": 0,
+		"loss": -5.0,
+		"win": 5.0
 		}
+		# self.rewards = {
+		# 	"positive": 0, 
+		# 	"win": 1,
+		# 	"negative": 0, 
+		# 	"tick": 0
+		# }
 		self.allowed_fps = 30
 		self._dir = os.path.dirname(os.path.abspath(__file__))
 
@@ -112,8 +118,7 @@ class originalGame(PyGameWrapper):
 
 			if event.type == KEYDOWN:
 				# Get the ladders collided with the player
-				self.laddersCollidedExact = self.newGame.Players[
-					0].checkCollision(self.ladderGroup)
+				self.laddersCollidedExact = self.newGame.Players[0].checkCollision(self.ladderGroup)
 				if (event.key == self.actions["jump"] and self.newGame.Players[0].onLadder == 0) or (
 						event.key == self.actions["up"] and self.laddersCollidedExact):
 					# Set the player to move up
@@ -191,10 +196,16 @@ class originalGame(PyGameWrapper):
 		self.newGame.redrawScreen(self.screen, self.width, self.height)
 
 		#enemy encounter
+
 		enemysCollected = pygame.sprite.spritecollide(
 			self.newGame.Players[0], self.enemyGroup, True)
 		enemysCollected2 = pygame.sprite.spritecollide(
 			self.newGame.Players[0], self.enemyGroup2, True)
+		# print(enemysCollected)
+		# print(enemysCollected2)
+		enemies_encountered = len(enemysCollected) + len(enemysCollected2)
+		self.newGame.score += enemies_encountered * self.rewards["loss"]
+
 		self.newGame.enemyCheck2(enemysCollected2)
 		self.newGame.enemyCheck(enemysCollected)
 
