@@ -16,7 +16,7 @@ class Board(object):
     The generation of the level also happens in this class.
     '''
 
-    def __init__(self, width, height, rewards, rng, _dir):
+    def __init__(self, width, height, rewards, rng, _dir, mapname, experiment = None):
         self.__width = width
         self.__actHeight = height
         self.__height = self.__actHeight + 10
@@ -27,9 +27,16 @@ class Board(object):
         self.cycles = 0  # For the characters animation
         self.direction = 0
         self._dir = _dir
-        
+        self.mapname = mapname
         self.playerPosition = (120, 190)
-        self.princessPosition = (90,205)
+        # Choose princess position based on the type of experiment
+        if experiment == 'fire':
+            self.princessPosition = (200,195)
+        elif experiment == 'ladder':
+            self.princessPosition = (100,105)
+        else:
+            self.princessPosition = (30,47)
+
 
         self.IMAGES = {
             "still": pygame.image.load(os.path.join(_dir, 'assets/still.png')).convert_alpha(),
@@ -102,7 +109,7 @@ class Board(object):
         return 0
 
     def populateMap(self):
-        self.map = np.loadtxt("ourmap.txt", dtype='i', delimiter=',') #use numpy for python3
+        self.map = np.loadtxt(self.mapname, dtype='i', delimiter=',') #use numpy for python3
 
         for x in range(len(self.map)):
             for y in range(len(self.map[x])):

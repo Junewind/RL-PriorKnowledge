@@ -107,10 +107,11 @@ class PLE(object):
         self.action = []
         self.previous_score = 0
         self.frame_count = 0
+        # self.map = mapname
 
         # update the scores of games with values we pick
         if reward_values:
-            print("we here adjusting rewards")
+            # print("we here adjusting rewards")
             self.game.adjustRewards(reward_values)
             print(reward_values)
 

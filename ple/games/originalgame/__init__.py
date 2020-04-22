@@ -11,13 +11,15 @@ import os
 
 class originalGame(PyGameWrapper):
 
-	def __init__(self):
+	def __init__(self, mapname, experiment):
 		"""
 		Parameters
 		----------
 		None
 
 		"""
+		self.mapname = mapname
+		self.experiment = experiment
 		self.height = 230 #modify height accordingly based on how long the game level is 
 		self.width = 230
 		self.status = 2
@@ -64,7 +66,9 @@ class originalGame(PyGameWrapper):
 			self.height,
 			self.rewards,
 			self.rng,
-			self._dir)
+			self._dir,
+			self.mapname,
+			self.experiment)
 
 		# Assign groups from the Board instance that was created
 		self.playerGroup = self.newGame.playerGroup
