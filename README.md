@@ -30,3 +30,12 @@ p = PLE(game, fps=30, reward_values = rewards, display_screen=True, force_fps=Tr
 p.init()
 
 </code>
+
+New maps are under the following names:
+fire_1.txt
+fire_2.txt
+fire_3.txt
+ladder_1.txt
+ladder_2.txt
+fireandladder.txt
+enemies.txt
