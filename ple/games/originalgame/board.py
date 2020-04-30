@@ -28,9 +28,10 @@ class Board(object):
         self.direction = 0
         self._dir = _dir
         self.mapname = mapname
-        self.playerPosition = (120, 190)
+        self.playerPosition = (40, 195)
         # Choose princess position based on the type of experiment
         if experiment == 'fire':
+        	# self.princessPosition = (40,195)
             self.princessPosition = (200,195)
         elif experiment == 'ladder':
             self.princessPosition = (100,105)
