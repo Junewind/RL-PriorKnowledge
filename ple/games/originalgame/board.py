@@ -3,6 +3,7 @@ import pygame
 import math
 import sys
 import os
+import random
 import numpy as np
 from .person import Person
 from .onBoard import OnBoard
@@ -28,14 +29,30 @@ class Board(object):
         self.direction = 0
         self._dir = _dir
         self.mapname = mapname
-        self.playerPosition = (40, 195)
+        # self.playerPosition = (40, 195)
+        # self.playerPosition = (10, 195)
         # Choose princess position based on the type of experiment
         if experiment == 'fire':
-        	# self.princessPosition = (40,195)
-            self.princessPosition = (200,195)
+
+
+            # Tile#1 = (23,195)
+            # Tile#2 = (40,195)
+            # Tile#5 = (82,195)
+            # Tile#6 = (98,195)
+            # Tile#9 = (142,195)
+            # Tile#12 = (186,195)
+            # Tile#13 = (200,195)
+            start_states = [(23,195),(82,195),(98,195),(142,195),(186,195)]
+            self.playerPosition = random.choice(start_states)
+            self.princessPosition = (202,195)     
         elif experiment == 'ladder':
-            self.princessPosition = (100,105)
+            # Tile#3 = (53,105)
+            # Tile#8 = (128,105)
+            start_states = [(23,195),(98,195),(186,195),(53,105),(128,105),(186,105)]
+            self.playerPosition = random.choice(start_states)         
+            self.princessPosition = (97,105)
         else:
+            self.playerPosition = (120,190)
             self.princessPosition = (30,47)
 
 
@@ -216,7 +233,7 @@ class Board(object):
         if self.Players[0].checkCollision(self.allyGroup):
 
             self.score += self.rewards["win"]
-            self.lives = 0		
+            self.lives = 0      
             status = 1
             self.Players[0].setPosition(self.playerPosition)
             self.createGroups()
