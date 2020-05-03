@@ -44,7 +44,7 @@ class Board(object):
             # Tile#13 = (200,195)
             start_states = [(23,195),(82,195),(98,195),(142,195),(186,195)]
             self.playerPosition = random.choice(start_states)
-            self.princessPosition = (186,195)
+            self.princessPosition = (98,195)
             while(self.playerPosition == self.princessPosition):
                 self.playerPosition = random.choice(start_states)
         elif experiment == 'ladder':
